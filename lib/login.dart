@@ -10,7 +10,6 @@ class LoginPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       body: Column(
-        // mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Expanded(
             flex: 2,
@@ -19,11 +18,11 @@ class LoginPage extends StatelessWidget {
               alignment: AlignmentDirectional.bottomCenter,
               children: [
                 const Image(
-                  fit: BoxFit.fitHeight,
+                  fit: BoxFit.cover,
                   image: AssetImage('assets/images/login_house.jpg'),
                 ),
                 Positioned(
-                  bottom: 0,
+                  bottom: 8.0,
                   child: SignInButton(
                     Buttons.Google,
                     text: 'Entrar com o Google',
