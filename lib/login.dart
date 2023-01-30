@@ -36,47 +36,39 @@ class LoginPage extends StatelessWidget {
             flex: 2,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Padding(
-                  padding: EdgeInsets.all(16.0),
-                  child: Text.rich(
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: Colors.black54,
-                    ),
-                    TextSpan(
-                      children: [
-                        TextSpan(
-                          text: "ATENÇÃO: ",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                          ),
+                const Text.rich(
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Colors.black54,
+                  ),
+                  TextSpan(
+                    children: [
+                      TextSpan(
+                        text: "ATENÇÃO: ",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
                         ),
-                        TextSpan(
-                          text:
-                              "Caso não tenha um gmail, convidamos você a conhecer essa ferramenta inovadora que foi lançada recentemente, por volta de 2004. ",
+                      ),
+                      TextSpan(
+                        text:
+                            "Caso não tenha um gmail, convidamos você a conhecer essa ferramenta inovadora que foi lançada recentemente, por volta de 2004. ",
+                      ),
+                      TextSpan(
+                        text: "\nWelcome to the future",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
                         ),
-                        TextSpan(
-                          text: "\nWelcome to the future",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
-                Container(
-                  constraints: BoxConstraints.tight(const Size.square(250)),
-                  child: Image.asset('assets/images/logo.png'),
-                ),
-                const Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Text(
-                    '© Copyright 2023 - Abestados Produções S.A.',
-                    style: TextStyle(
-                      color: Colors.black87,
-                    ),
+                Image.asset('assets/images/logo.png'),
+                const Text(
+                  '© Copyright 2023 - Abestados Produções S.A.',
+                  style: TextStyle(
+                    color: Colors.black87,
                   ),
                 )
               ],
