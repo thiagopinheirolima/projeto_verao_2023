@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "598440548492",
+    "firebase_url": "https://casa-verao-2023-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "casa-verao-2023",
+    "storage_bucket": "casa-verao-2023.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:598440548492:android:cbe3e327d493392f0b43a9",
+        "android_client_info": {
+          "package_name": "com.example.projeto_verao_2023"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "598440548492-4a9s8mmo96evuk14koio5n0np4qa5gvb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC9xcD7Ton9VP2lq6XqNExn6VMVo3VP97Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "598440548492-238phvjohcdgd9skvfjcqa85r9fge4ui.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "598440548492-i0r2sgnfnck7ekkd5fv7or7ls2m4leet.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.projetoVerao2023"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -23,9 +23,15 @@ class DefaultFirebaseOptions {
       case TargetPlatform.android:
         return android;
       case TargetPlatform.iOS:
-        return ios;
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for ios - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
       case TargetPlatform.macOS:
-        return macos;
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for macos - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
       case TargetPlatform.windows:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for windows - '
@@ -60,27 +66,5 @@ class DefaultFirebaseOptions {
     projectId: 'casa-verao-2023',
     databaseURL: 'https://casa-verao-2023-default-rtdb.europe-west1.firebasedatabase.app',
     storageBucket: 'casa-verao-2023.appspot.com',
-  );
-
-  static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyA_XLBUaEmdUtCF_QYDcdkE8YTEdxzA2ME',
-    appId: '1:598440548492:ios:29f3e1708f58e20c0b43a9',
-    messagingSenderId: '598440548492',
-    projectId: 'casa-verao-2023',
-    databaseURL: 'https://casa-verao-2023-default-rtdb.europe-west1.firebasedatabase.app',
-    storageBucket: 'casa-verao-2023.appspot.com',
-    iosClientId: '598440548492-i0r2sgnfnck7ekkd5fv7or7ls2m4leet.apps.googleusercontent.com',
-    iosBundleId: 'com.example.projetoVerao2023',
-  );
-
-  static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyA_XLBUaEmdUtCF_QYDcdkE8YTEdxzA2ME',
-    appId: '1:598440548492:ios:29f3e1708f58e20c0b43a9',
-    messagingSenderId: '598440548492',
-    projectId: 'casa-verao-2023',
-    databaseURL: 'https://casa-verao-2023-default-rtdb.europe-west1.firebasedatabase.app',
-    storageBucket: 'casa-verao-2023.appspot.com',
-    iosClientId: '598440548492-i0r2sgnfnck7ekkd5fv7or7ls2m4leet.apps.googleusercontent.com',
-    iosBundleId: 'com.example.projetoVerao2023',
   );
 }
