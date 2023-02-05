@@ -1,10 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class HomePage extends StatelessWidget {
-  HomePage({Key? key}) : super(key: key);
+  const HomePage({super.key});
   final avatarImageURL =
       'https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png';
 
@@ -15,20 +15,37 @@ class HomePage extends StatelessWidget {
     final userName =
         FirebaseAuth.instance.currentUser?.displayName ?? 'Usuário';
     return Scaffold(
-        appBar: AppBar(title: const Center(child: Text('Todos Juntos'))),
+        appBar: AppBar(
+          title: const Center(
+            child: Text('Todos Juntos'),
+          ),
+        ),
         drawer: Drawer(
           child: ListView(
             padding: EdgeInsets.zero,
             children: [
               DrawerHeader(
+                decoration: const BoxDecoration(
+                  color: Colors.teal,
+                ),
                 child: Flex(
                   direction: Axis.vertical,
                   children: [
                     Expanded(
-                      child: ClipOval(
-                        child: Image.network(
-                          userPhoto,
-                          fit: BoxFit.cover,
+                      child: Container(
+                        decoration: BoxDecoration(
+                            border: Border.all(
+                              color: Colors.white,
+                              width: 2,
+                            ),
+                            borderRadius: BorderRadius.circular(
+                              1000,
+                            )),
+                        child: ClipOval(
+                          child: Image.network(
+                            userPhoto,
+                            fit: BoxFit.cover,
+                          ),
                         ),
                       ),
                     ),
@@ -37,7 +54,7 @@ class HomePage extends StatelessWidget {
                       child: Text(
                         userName,
                         style: const TextStyle(
-                          color: Colors.black87,
+                          color: Colors.white,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -50,9 +67,12 @@ class HomePage extends StatelessWidget {
               //   onTap: () {},
               // ),
               ListTile(
-                title: const Text('Logout'),
-                onTap: FirebaseAuth.instance.signOut,
-              ),
+                  title: const Text('Logout'),
+                  onTap: () async {
+                    await FirebaseAuth.instance.signOut();
+                    // ignore: use_build_context_synchronously
+                    context.goNamed('login');
+                  }),
             ],
           ),
         ),
@@ -79,10 +99,10 @@ class HomePage extends StatelessWidget {
                         width: 1,
                       ),
                       borderRadius: const BorderRadius.only(
-                        bottomLeft: Radius.circular(40),
-                        topLeft: Radius.circular(40),
-                        topRight: Radius.circular(20),
-                        bottomRight: Radius.circular(20),
+                        bottomLeft: Radius.circular(46),
+                        topLeft: Radius.circular(46),
+                        topRight: Radius.circular(46),
+                        bottomRight: Radius.circular(46),
                       ),
                     ),
                     child: Flex(

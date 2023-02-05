@@ -1,39 +1,56 @@
+import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:url_strategy/url_strategy.dart';
 
 import 'firebase_options.dart';
-import 'home.dart';
-import 'login.dart';
+import 'pages.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
-
-  runApp(const StartPage());
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  setPathUrlStrategy();
+  runApp(const MainPage());
 }
 
-class StartPage extends StatelessWidget {
-  const StartPage({Key? key}) : super(key: key);
+class MainPage extends StatelessWidget {
+  const MainPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       title: 'Casa Verão 2023',
-      home: Scaffold(
-        body: StreamBuilder<User?>(
-          stream: FirebaseAuth.instance.authStateChanges(),
-          builder: (context, snapshot) {
-            if (snapshot.hasData) {
-              return HomePage();
-            }
-            return const LoginPage();
-          },
-        ),
+      theme: ThemeData(
+        primarySwatch: Colors.teal,
       ),
+      routerConfig: GoRouter(
+        routes: [
+          GoRoute(
+            name: 'home',
+            path: '/',
+            builder: (context, state) => const HomePage(),
+            redirect: _redirect,
+          ),
+          GoRoute(
+            name: 'login',
+            path: '/login',
+            builder: (context, state) => const LoginPage(),
+            redirect: _redirect,
+          ),
+        ],
+      ),
+      // initialRoute:
+      //     FirebaseAuth.instance.currentUser == null ? '/login' : '/home',
+      // routes: {
+      //   '/login': (context) => const LoginPage(),
+      //   '/home': (context) => const HomePage()
+      // },
     );
+  }
+
+  String _redirect(context, state) {
+    return FirebaseAuth.instance.currentUser == null ? '/login' : '/';
   }
 }

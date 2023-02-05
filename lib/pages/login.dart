@@ -3,10 +3,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class LoginPage extends StatelessWidget {
-  const LoginPage({Key? key}) : super(key: key);
+  const LoginPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +30,13 @@ class LoginPage extends StatelessWidget {
                   child: SignInButton(
                     Buttons.Google,
                     text: 'Entrar com o Google',
-                    onPressed: _signInWithGoogle,
+                    onPressed: () async {
+                      final user = await _signInWithGoogle();
+                      if (user != null) {
+                        // ignore: use_build_context_synchronously
+                        context.goNamed('home');
+                      }
+                    },
                   ),
                 ),
               ],
@@ -67,7 +74,12 @@ class LoginPage extends StatelessWidget {
                     ],
                   ),
                 ),
-                Image.asset('assets/images/logo.png'),
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Image.asset(
+                    'assets/images/logo.png',
+                  ),
+                ),
                 const Text(
                   '© Copyright 2023 - Abestados Produções S.A.',
                   style: TextStyle(
@@ -82,7 +94,7 @@ class LoginPage extends StatelessWidget {
     );
   }
 
-  Future<void> _signInWithGoogle() async {
+  Future<User?> _signInWithGoogle() async {
     UserCredential userCredential;
 
     if (kIsWeb) {
@@ -106,16 +118,18 @@ class LoginPage extends StatelessWidget {
           await FirebaseAuth.instance.signInWithCredential(credential);
     }
 
-    await _storeUser(userCredential);
+    final user = userCredential.user;
+    if (user != null) {
+      await _storeUser(user);
+    }
+
+    return user;
   }
 
-  Future<void> _storeUser(UserCredential credential) async {
-    if (credential.user != null) {
-      final user = credential.user!;
-      await FirebaseFirestore.instance
-          .collection('users')
-          .doc(user.uid)
-          .set({'name': user.displayName, 'photo': user.photoURL});
-    }
+  Future<void> _storeUser(User user) async {
+    await FirebaseFirestore.instance
+        .collection('users')
+        .doc(user.uid)
+        .set({'name': user.displayName, 'photo': user.photoURL});
   }
 }
