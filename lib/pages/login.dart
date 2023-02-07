@@ -44,9 +44,8 @@ class LoginPage extends StatelessWidget {
           ),
           Expanded(
             flex: 5,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
+            child: Flex(
+              direction: Axis.vertical,
               children: [
                 const Padding(
                   padding: EdgeInsets.all(8.0),
@@ -77,10 +76,10 @@ class LoginPage extends StatelessWidget {
                     ),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
+                Expanded(
                   child: Image.asset(
                     'assets/images/logo.png',
+                    fit: BoxFit.contain,
                   ),
                 ),
                 const Text(
