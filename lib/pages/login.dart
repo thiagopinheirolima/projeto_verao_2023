@@ -82,10 +82,13 @@ class LoginPage extends StatelessWidget {
                     fit: BoxFit.contain,
                   ),
                 ),
-                const Text(
-                  '© Copyright 2023 - Abestados Produções S.A.',
-                  style: TextStyle(
-                    color: Colors.black87,
+                const Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Text(
+                    '© Copyright 2023 - Abestados Produções S.A.',
+                    style: TextStyle(
+                      color: Colors.black87,
+                    ),
                   ),
                 )
               ],
