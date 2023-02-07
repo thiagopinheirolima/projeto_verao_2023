@@ -29,7 +29,7 @@ class HomePage extends StatelessWidget {
               fit: StackFit.expand,
               children: [
                 Image.asset(
-                  'assets/images/imagem1.webp',
+                  'assets/images/home.webp',
                   fit: BoxFit.cover,
                 ),
                 const Center(

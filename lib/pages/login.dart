@@ -23,7 +23,7 @@ class LoginPage extends StatelessWidget {
               children: [
                 const Image(
                   fit: BoxFit.cover,
-                  image: AssetImage('assets/images/login_house.jpg'),
+                  image: AssetImage('assets/images/login.jpg'),
                 ),
                 Positioned(
                   bottom: 8.0,
