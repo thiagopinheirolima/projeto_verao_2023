@@ -48,30 +48,33 @@ class LoginPage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Text.rich(
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Colors.black54,
-                  ),
-                  TextSpan(
-                    children: [
-                      TextSpan(
-                        text: "ATENÇÃO: ",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
+                const Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Text.rich(
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Colors.black54,
+                    ),
+                    TextSpan(
+                      children: [
+                        TextSpan(
+                          text: "ATENÇÃO: ",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
-                      ),
-                      TextSpan(
-                        text:
-                            "Caso não tenha um gmail, convidamos você a conhecer essa ferramenta inovadora que foi lançada recentemente, por volta de 2004. ",
-                      ),
-                      TextSpan(
-                        text: "\nWelcome to the future",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
+                        TextSpan(
+                          text:
+                              "Caso não tenha um gmail, convidamos você a conhecer essa ferramenta inovadora que foi lançada recentemente, por volta de 2004. ",
                         ),
-                      ),
-                    ],
+                        TextSpan(
+                          text: "\nWelcome to the future",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
                 Padding(

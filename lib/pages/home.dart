@@ -1,12 +1,13 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
+import 'shared/menu.dart';
+
+const avatarImageURL =
+    'https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
-  final avatarImageURL =
-      'https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png';
 
   @override
   Widget build(BuildContext context) {
@@ -15,130 +16,70 @@ class HomePage extends StatelessWidget {
     final userName =
         FirebaseAuth.instance.currentUser?.displayName ?? 'Usuário';
     return Scaffold(
-        appBar: AppBar(
-          title: const Center(
-            child: Text('Todos Juntos'),
-          ),
-        ),
-        drawer: Drawer(
-          child: ListView(
-            padding: EdgeInsets.zero,
-            children: [
-              DrawerHeader(
-                decoration: const BoxDecoration(
-                  color: Colors.teal,
+      appBar: AppBar(
+        centerTitle: true,
+        title: const Text('Todos Juntos'),
+      ),
+      drawer: Menu(userPhoto: userPhoto, userName: userName),
+      body: Column(
+        children: [
+          Flexible(
+            flex: 2,
+            child: Stack(
+              fit: StackFit.expand,
+              children: [
+                Image.asset(
+                  'assets/images/imagem1.webp',
+                  fit: BoxFit.cover,
                 ),
-                child: Flex(
-                  direction: Axis.vertical,
-                  children: [
-                    Expanded(
-                      child: Container(
-                        decoration: BoxDecoration(
-                            border: Border.all(
-                              color: Colors.white,
-                              width: 2,
-                            ),
-                            borderRadius: BorderRadius.circular(
-                              1000,
-                            )),
-                        child: ClipOval(
-                          child: Image.network(
-                            userPhoto,
-                            fit: BoxFit.cover,
-                          ),
-                        ),
+                const Center(
+                  child: Text(
+                    'HOME',
+                    textScaleFactor: 4,
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+                Positioned(
+                  bottom: 0,
+                  right: 0,
+                  left: 0,
+                  child: Container(
+                    height: 32,
+                    decoration: const BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(32),
+                        topRight: Radius.circular(32),
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        userName,
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    )
-                  ],
+                  ),
+                )
+              ],
+            ),
+          ),
+          Flexible(
+            flex: 6,
+            child: Container(
+              color: Colors.white,
+              child: GridView.count(
+                crossAxisCount: 3,
+                padding: const EdgeInsets.all(16),
+                childAspectRatio: 0.7,
+                mainAxisSpacing: 16,
+                crossAxisSpacing: 16,
+                children: List.generate(
+                  6,
+                  (index) => Container(
+                    color: Colors.amber,
+                  ),
                 ),
               ),
-              // ListTile(
-              //   title: const Text('Item 1'),
-              //   onTap: () {},
-              // ),
-              ListTile(
-                  title: const Text('Logout'),
-                  onTap: () async {
-                    await FirebaseAuth.instance.signOut();
-                    // ignore: use_build_context_synchronously
-                    context.goNamed('login');
-                  }),
-            ],
+            ),
           ),
-        ),
-        body: FutureBuilder(
-          future: FirebaseFirestore.instance.collection('users').get(),
-          builder: (context, snapshot) {
-            if (snapshot.hasData) {
-              return GridView.builder(
-                itemCount: snapshot.data?.size,
-                padding: const EdgeInsets.all(8),
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  childAspectRatio: 2,
-                  crossAxisCount: 2,
-                  mainAxisSpacing: 8,
-                  crossAxisSpacing: 8,
-                ),
-                itemBuilder: (context, index) {
-                  final user = snapshot.data?.docs[index].data();
-                  return Container(
-                    padding: const EdgeInsets.all(4.0),
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        color: Colors.black87,
-                        width: 1,
-                      ),
-                      borderRadius: const BorderRadius.only(
-                        bottomLeft: Radius.circular(46),
-                        topLeft: Radius.circular(46),
-                        topRight: Radius.circular(46),
-                        bottomRight: Radius.circular(46),
-                      ),
-                    ),
-                    child: Flex(
-                      direction: Axis.horizontal,
-                      children: [
-                        Flexible(
-                          fit: FlexFit.loose,
-                          child: ClipOval(
-                            child: Image.network(
-                              user?['photo'],
-                            ),
-                          ),
-                        ),
-                        Flexible(
-                          fit: FlexFit.tight,
-                          child: Center(
-                            child: Text(
-                              user?['name'],
-                              textAlign: TextAlign.center,
-                            ),
-                          ),
-                        )
-                      ],
-                    ),
-                  );
-                },
-              );
-            } else {
-              return const Center(
-                child: Text(
-                  'Carregando',
-                  textScaleFactor: 2,
-                ),
-              );
-            }
-          },
-        ));
+        ],
+      ),
+    );
   }
 }
