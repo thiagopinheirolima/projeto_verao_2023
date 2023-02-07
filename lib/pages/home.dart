@@ -26,7 +26,7 @@ class HomePage extends StatelessWidget {
       body: Column(
         children: [
           Flexible(
-            flex: 2,
+            flex: 5,
             child: Stack(
               fit: StackFit.expand,
               children: [
@@ -48,12 +48,12 @@ class HomePage extends StatelessWidget {
                   right: 0,
                   left: 0,
                   child: Container(
-                    height: 32,
+                    height: 24,
                     decoration: const BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(32),
-                        topRight: Radius.circular(32),
+                        topLeft: Radius.circular(50),
+                        topRight: Radius.circular(50),
                       ),
                     ),
                   ),
@@ -62,15 +62,17 @@ class HomePage extends StatelessWidget {
             ),
           ),
           Flexible(
-            flex: 6,
+            flex: 11,
             child: Container(
               color: Colors.white,
               child: GridView.count(
                 crossAxisCount: 3,
-                padding: const EdgeInsets.all(16),
-                childAspectRatio: 0.66,
-                mainAxisSpacing: 48,
-                crossAxisSpacing: 16,
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                ),
+                childAspectRatio: 0.75,
+                mainAxisSpacing: 24,
+                crossAxisSpacing: 8,
                 children: [
                   HomeItem(
                     name: 'PARTICIPANTES',
@@ -107,9 +109,11 @@ class HomePage extends StatelessWidget {
             ),
           ),
           Expanded(
-            flex: 3,
+            flex: 4,
             child: Padding(
-              padding: const EdgeInsets.all(24.0),
+              padding: const EdgeInsets.symmetric(
+                vertical: 16,
+              ),
               child: Image.asset(
                 'assets/images/logo.png',
                 fit: BoxFit.contain,
