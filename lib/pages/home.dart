@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:go_router/go_router.dart';
 
 import 'shared/menu.dart';
 
@@ -16,6 +17,7 @@ class HomePage extends StatelessWidget {
     final userName =
         FirebaseAuth.instance.currentUser?.displayName ?? 'Usuário';
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         centerTitle: true,
         title: const Text('Todos Juntos'),
@@ -66,19 +68,119 @@ class HomePage extends StatelessWidget {
               child: GridView.count(
                 crossAxisCount: 3,
                 padding: const EdgeInsets.all(16),
-                childAspectRatio: 0.7,
-                mainAxisSpacing: 16,
+                childAspectRatio: 0.66,
+                mainAxisSpacing: 48,
                 crossAxisSpacing: 16,
-                children: List.generate(
-                  6,
-                  (index) => Container(
-                    color: Colors.amber,
+                children: [
+                  HomeItem(
+                    name: 'PARTICIPANTES',
+                    icon: Icons.people,
+                    onTap: () => context.goNamed('users'),
+                  ),
+                  HomeItem(
+                    name: 'CATEGORIAS',
+                    icon: Icons.category,
+                    onTap: () {},
+                  ),
+                  HomeItem(
+                    name: 'RANKING',
+                    icon: Icons.star,
+                    onTap: () {},
+                  ),
+                  HomeItem(
+                    name: 'A CASA',
+                    icon: Icons.house,
+                    onTap: () {},
+                  ),
+                  HomeItem(
+                    name: 'FAQ',
+                    icon: Icons.question_mark,
+                    onTap: () {},
+                  ),
+                  HomeItem(
+                    name: 'PROGRAMAÇÃO',
+                    icon: Icons.calendar_month,
+                    onTap: () {},
+                  )
+                ],
+              ),
+            ),
+          ),
+          Expanded(
+            flex: 3,
+            child: Padding(
+              padding: const EdgeInsets.all(24.0),
+              child: Image.asset(
+                'assets/images/logo.png',
+                fit: BoxFit.contain,
+              ),
+            ),
+          )
+        ],
+      ),
+    );
+  }
+}
+
+class HomeItem extends StatelessWidget {
+  const HomeItem({
+    super.key,
+    required this.onTap,
+    required this.name,
+    required this.icon,
+  });
+
+  final Function() onTap;
+  final String name;
+  final IconData icon;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: const BorderRadius.vertical(
+            top: Radius.circular(20),
+          ),
+          color: Colors.teal.shade200,
+        ),
+        child: Flex(
+          direction: Axis.vertical,
+          children: [
+            Expanded(
+              flex: 2,
+              child: Center(
+                child: Text(
+                  name,
+                  style: TextStyle(
+                    color: Colors.cyan.shade800,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
               ),
             ),
-          ),
-        ],
+            Expanded(
+              flex: 2,
+              child: Container(
+                constraints: const BoxConstraints.expand(),
+                decoration: BoxDecoration(
+                  color: Colors.cyan.shade800,
+                  borderRadius: const BorderRadius.vertical(
+                    top: Radius.elliptical(600, 300),
+                  ),
+                ),
+                child: Center(
+                  child: Icon(
+                    icon,
+                    size: 50,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

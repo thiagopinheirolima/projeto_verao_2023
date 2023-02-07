@@ -2,24 +2,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-class MenuItem {
-  String name;
-  Function onClick;
-
-  MenuItem(this.name, this.onClick);
-}
-
-final List<MenuItem> menuItems = [
-  MenuItem('Participantes', (BuildContext context) {
-    context.pushNamed('users');
-  }),
-  MenuItem('Logout', (BuildContext context) async {
-    await FirebaseAuth.instance.signOut();
-    // ignore: use_build_context_synchronously
-    context.goNamed('login');
-  }),
-];
-
 class Menu extends StatelessWidget {
   const Menu({
     super.key,
@@ -74,11 +56,14 @@ class Menu extends StatelessWidget {
               ],
             ),
           ),
-          for (var item in menuItems)
-            ListTile(
-              title: Text(item.name),
-              onTap: () => item.onClick(context),
-            ),
+          ListTile(
+            title: const Text('Logout'),
+            onTap: () async {
+              await FirebaseAuth.instance.signOut();
+              // ignore: use_build_context_synchronously
+              context.goNamed('login');
+            },
+          ),
         ],
       ),
     );

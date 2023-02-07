@@ -16,7 +16,7 @@ class LoginPage extends StatelessWidget {
       body: Column(
         children: [
           Expanded(
-            flex: 2,
+            flex: 4,
             child: Stack(
               fit: StackFit.expand,
               alignment: AlignmentDirectional.bottomCenter,
@@ -43,7 +43,7 @@ class LoginPage extends StatelessWidget {
             ),
           ),
           Expanded(
-            flex: 2,
+            flex: 5,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
