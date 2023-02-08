@@ -28,5 +28,13 @@ final GoRouter routes = GoRouter(
 );
 
 String _redirect(BuildContext context, GoRouterState state) {
-  return FirebaseAuth.instance.currentUser == null ? '/login' : state.location;
+  const String loginRoute = '/login';
+  const String homeRoute = '/';
+  final bool hasUser = FirebaseAuth.instance.currentUser == null;
+
+  if (state.location == loginRoute) {
+    return hasUser ? loginRoute : homeRoute;
+  } else {
+    return hasUser ? loginRoute : state.location;
+  }
 }
