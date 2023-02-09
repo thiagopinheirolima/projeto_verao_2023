@@ -7,17 +7,18 @@ import 'pages.dart';
 final GoRouter routes = GoRouter(
   routes: [
     GoRoute(
-        name: 'home',
-        path: '/',
-        builder: (context, state) => const HomePage(),
-        redirect: _redirect,
-        routes: [
-          GoRoute(
-            name: 'users',
-            path: 'users',
-            builder: (context, state) => const UsersPage(),
-          ),
-        ]),
+      name: 'home',
+      path: '/',
+      builder: (context, state) => const HomePage(),
+      redirect: _redirect,
+      routes: [
+        GoRoute(
+          name: 'users',
+          path: 'users',
+          builder: (context, state) => const UsersPage(),
+        ),
+      ],
+    ),
     GoRoute(
       name: 'login',
       path: '/login',
