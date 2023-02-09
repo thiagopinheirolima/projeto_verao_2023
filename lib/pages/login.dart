@@ -111,7 +111,7 @@ class LoginPage extends StatelessWidget {
       GoogleAuthProvider googleProvider = GoogleAuthProvider();
       googleProvider
           .addScope('https://www.googleapis.com/auth/userinfo.profile');
-      await FirebaseAuth.instance.setPersistence(Persistence.LOCAL);
+      await FirebaseAuth.instance.setPersistence(Persistence.INDEXED_DB);
       userCredential =
           await FirebaseAuth.instance.signInWithPopup(googleProvider);
     } else {

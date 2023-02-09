@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:go_router/go_router.dart';
+import 'package:projeto_verao_2023/colors.dart';
 
 import 'shared/menu.dart';
 
@@ -16,6 +17,7 @@ class HomePage extends StatelessWidget {
         FirebaseAuth.instance.currentUser?.photoURL ?? avatarImageURL;
     final userName =
         FirebaseAuth.instance.currentUser?.displayName ?? 'Usuário';
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -28,50 +30,45 @@ class HomePage extends StatelessWidget {
           Flexible(
             flex: 5,
             child: Stack(
+              clipBehavior: Clip.none,
               fit: StackFit.expand,
               children: [
-                Image.asset(
-                  'assets/images/home.webp',
-                  fit: BoxFit.cover,
+                Positioned(
+                  top: 0,
+                  bottom: -25,
+                  right: 0,
+                  left: 0,
+                  child: Image.asset(
+                    'assets/images/home.webp',
+                    fit: BoxFit.cover,
+                  ),
                 ),
                 const Center(
                   child: Text(
                     'HOME',
-                    textScaleFactor: 4,
+                    textScaleFactor: 3,
                     style: TextStyle(
                       color: Colors.white,
                     ),
                   ),
                 ),
-                Positioned(
-                  bottom: 0,
-                  right: 0,
-                  left: 0,
-                  child: Container(
-                    height: 24,
-                    decoration: const BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(50),
-                        topRight: Radius.circular(50),
-                      ),
-                    ),
-                  ),
-                )
               ],
             ),
           ),
           Flexible(
             flex: 11,
             child: Container(
-              color: Colors.white,
+              decoration: const BoxDecoration(
+                borderRadius: BorderRadius.vertical(
+                  top: Radius.circular(25),
+                ),
+                color: Colors.white,
+              ),
               child: GridView.count(
                 crossAxisCount: 3,
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 16,
-                ),
+                padding: const EdgeInsets.all(16),
                 childAspectRatio: 0.75,
-                mainAxisSpacing: 24,
+                mainAxisSpacing: 16,
                 crossAxisSpacing: 8,
                 children: [
                   HomeItem(
@@ -102,7 +99,7 @@ class HomePage extends StatelessWidget {
                   HomeItem(
                     name: 'PROGRAMAÇÃO',
                     icon: Icons.calendar_month,
-                    onTap: () {},
+                    onTap: () => context.goNamed('schedule'),
                   )
                 ],
               ),
@@ -143,11 +140,11 @@ class HomeItem extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        decoration: BoxDecoration(
-          borderRadius: const BorderRadius.vertical(
+        decoration: const BoxDecoration(
+          borderRadius: BorderRadius.vertical(
             top: Radius.circular(20),
           ),
-          color: Colors.teal.shade200,
+          color: Colors.teal,
         ),
         child: Flex(
           direction: Axis.vertical,
@@ -157,8 +154,8 @@ class HomeItem extends StatelessWidget {
               child: Center(
                 child: Text(
                   name,
-                  style: TextStyle(
-                    color: Colors.cyan.shade800,
+                  style: const TextStyle(
+                    color: primaryColor,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -168,9 +165,9 @@ class HomeItem extends StatelessWidget {
               flex: 2,
               child: Container(
                 constraints: const BoxConstraints.expand(),
-                decoration: BoxDecoration(
-                  color: Colors.cyan.shade800,
-                  borderRadius: const BorderRadius.vertical(
+                decoration: const BoxDecoration(
+                  color: primaryColor,
+                  borderRadius: BorderRadius.vertical(
                     top: Radius.elliptical(600, 300),
                   ),
                 ),

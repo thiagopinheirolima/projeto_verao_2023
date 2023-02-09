@@ -17,6 +17,11 @@ final GoRouter routes = GoRouter(
           path: 'users',
           builder: (context, state) => const UsersPage(),
         ),
+        GoRoute(
+          name: 'schedule',
+          path: 'schedule',
+          builder: (context, state) => const SchedulePage(),
+        ),
       ],
     ),
     GoRoute(
