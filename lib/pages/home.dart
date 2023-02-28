@@ -4,11 +4,13 @@ import 'package:go_router/go_router.dart';
 import 'package:projeto_verao_2023/colors.dart';
 
 import 'shared/menu.dart';
+import 'shared/shell.dart';
 
 const avatarImageURL =
     'https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_1280.png';
 
 class HomePage extends StatelessWidget {
+  final title = 'Todos Juntos';
   const HomePage({super.key});
 
   @override
@@ -22,88 +24,55 @@ class HomePage extends StatelessWidget {
       backgroundColor: Colors.white,
       appBar: AppBar(
         centerTitle: true,
-        title: const Text('Todos Juntos'),
+        title: Text(title),
       ),
       drawer: Menu(userPhoto: userPhoto, userName: userName),
       body: Column(
         children: [
-          Flexible(
+          ShellHeader(
             flex: 5,
-            child: Stack(
-              clipBehavior: Clip.none,
-              fit: StackFit.expand,
-              children: [
-                Positioned(
-                  top: 0,
-                  bottom: -25,
-                  right: 0,
-                  left: 0,
-                  child: Image.asset(
-                    'assets/images/home.webp',
-                    fit: BoxFit.cover,
-                  ),
-                ),
-                const Center(
-                  child: Text(
-                    'HOME',
-                    style: TextStyle(
-                      fontSize: 100,
-                      fontFamily: 'BebasNeue',
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-              ],
-            ),
+            title: title,
           ),
-          Flexible(
+          ShellBody(
             flex: 11,
-            child: Container(
-              decoration: const BoxDecoration(
-                borderRadius: BorderRadius.vertical(
-                  top: Radius.circular(25),
+            child: GridView.count(
+              crossAxisCount: 3,
+              padding: const EdgeInsets.all(16),
+              childAspectRatio: 0.75,
+              mainAxisSpacing: 16,
+              crossAxisSpacing: 8,
+              children: [
+                _HomeItem(
+                  name: 'PARTICIPANTES',
+                  icon: 'assets/images/icons/participantes.png',
+                  onTap: () => context.goNamed('users'),
                 ),
-                color: Colors.white,
-              ),
-              child: GridView.count(
-                crossAxisCount: 3,
-                padding: const EdgeInsets.all(16),
-                childAspectRatio: 0.75,
-                mainAxisSpacing: 16,
-                crossAxisSpacing: 8,
-                children: [
-                  HomeItem(
-                    name: 'PARTICIPANTES',
-                    icon: 'assets/images/icons/participantes.png',
-                    onTap: () => context.goNamed('users'),
-                  ),
-                  HomeItem(
-                    name: 'CATEGORIAS',
-                    icon: 'assets/images/icons/votos.png',
-                    onTap: () {},
-                  ),
-                  HomeItem(
-                    name: 'RANKING',
-                    icon: 'assets/images/icons/ranking.png',
-                    onTap: () {},
-                  ),
-                  HomeItem(
-                    name: 'A CASA',
-                    icon: 'assets/images/icons/acasa.png',
-                    onTap: () {},
-                  ),
-                  HomeItem(
-                    name: 'FAQ',
-                    icon: 'assets/images/icons/faq.png',
-                    onTap: () {},
-                  ),
-                  HomeItem(
-                    name: 'PROGRAMAÇÃO',
-                    icon: 'assets/images/icons/programacao.png',
-                    onTap: () => context.goNamed('schedule'),
-                  )
-                ],
-              ),
+                _HomeItem(
+                  name: 'CATEGORIAS',
+                  icon: 'assets/images/icons/votos.png',
+                  onTap: () {},
+                ),
+                _HomeItem(
+                  name: 'RANKING',
+                  icon: 'assets/images/icons/ranking.png',
+                  onTap: () {},
+                ),
+                _HomeItem(
+                  name: 'A CASA',
+                  icon: 'assets/images/icons/acasa.png',
+                  onTap: () {},
+                ),
+                _HomeItem(
+                  name: 'FAQ',
+                  icon: 'assets/images/icons/faq.png',
+                  onTap: () {},
+                ),
+                _HomeItem(
+                  name: 'PROGRAMAÇÃO',
+                  icon: 'assets/images/icons/programacao.png',
+                  onTap: () => context.goNamed('schedule'),
+                )
+              ],
             ),
           ),
           Expanded(
@@ -124,9 +93,8 @@ class HomePage extends StatelessWidget {
   }
 }
 
-class HomeItem extends StatelessWidget {
-  const HomeItem({
-    super.key,
+class _HomeItem extends StatelessWidget {
+  const _HomeItem({
     required this.onTap,
     required this.name,
     required this.icon,
