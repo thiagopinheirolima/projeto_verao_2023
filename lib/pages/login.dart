@@ -6,6 +6,8 @@ import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
+import '../colors.dart';
+
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
 
@@ -52,7 +54,8 @@ class LoginPage extends StatelessWidget {
                   child: Text.rich(
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      color: Colors.black54,
+                      fontFamily: 'KozGoPro',
+                      color: textColor,
                     ),
                     TextSpan(
                       children: [
@@ -92,7 +95,9 @@ class LoginPage extends StatelessWidget {
                   child: Text(
                     '© Copyright 2023 - Abestados Produções S.A.',
                     style: TextStyle(
-                      color: Colors.black87,
+                      fontFamily: 'KozGoPro',
+                      fontWeight: FontWeight.bold,
+                      color: textColor,
                     ),
                   ),
                 )

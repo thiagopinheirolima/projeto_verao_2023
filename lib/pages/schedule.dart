@@ -33,8 +33,9 @@ class SchedulePage extends StatelessWidget {
                 const Center(
                   child: Text(
                     'PROGRAMAÇÃO',
-                    textScaleFactor: 3,
                     style: TextStyle(
+                      fontFamily: 'BebasNeue',
+                      fontSize: 75,
                       color: Colors.white,
                     ),
                   ),
@@ -58,10 +59,30 @@ class SchedulePage extends StatelessWidget {
                 mainAxisSpacing: 16,
                 crossAxisSpacing: 16,
                 children: const [
-                  ScheduleItem(),
-                  ScheduleItem(),
-                  ScheduleItem(),
-                  ScheduleItem(),
+                  ScheduleItem(
+                    title: 'Bingo',
+                    date: '07 de Julho',
+                    time: 'Sexta - 12h',
+                    phone: '915549968',
+                  ),
+                  ScheduleItem(
+                    title: 'Noite de Jogos',
+                    date: '07 de Julho',
+                    time: 'sexta - 21h',
+                    phone: '915549968',
+                  ),
+                  ScheduleItem(
+                    title: 'Festa Junina',
+                    date: '08 de Julho',
+                    time: 'sábado - 19h',
+                    phone: '915549968',
+                  ),
+                  ScheduleItem(
+                    title: 'Churrasco',
+                    date: '09 de Julho',
+                    time: 'domingo - 12h',
+                    phone: '915549968',
+                  ),
                 ],
               ),
             ),
@@ -74,8 +95,17 @@ class SchedulePage extends StatelessWidget {
 
 class ScheduleItem extends StatelessWidget {
   const ScheduleItem({
+    required this.title,
+    required this.date,
+    required this.time,
+    required this.phone,
     super.key,
   });
+
+  final String title;
+  final String date;
+  final String time;
+  final String phone;
 
   @override
   Widget build(BuildContext context) {
@@ -89,36 +119,43 @@ class ScheduleItem extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text(
-              'CHURRASCO',
-              style: TextStyle(
+            Text(
+              title,
+              style: const TextStyle(
+                fontFamily: 'BebasNeue',
                 color: highlightColor,
                 fontSize: 22,
               ),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: const [
+              children: [
                 Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Icon(
-                    Icons.calendar_month,
-                    color: highlightColor,
-                    size: 50,
+                  padding: const EdgeInsets.all(8.0),
+                  child: Image.asset(
+                    'assets/images/icons/calendar.png',
+                    width: 40,
+                    height: 40,
                   ),
                 ),
                 Text(
-                  '08/07\n19:00h',
+                  '$date\n$time',
                   textAlign: TextAlign.center,
-                  style: TextStyle(
+                  style: const TextStyle(
+                    fontFamily: 'BebasNeue',
                     color: Colors.white,
-                    fontSize: 20,
+                    fontSize: 18,
                   ),
                 ),
               ],
             ),
+            const SizedBox(
+              height: 8,
+            ),
             ElevatedButton(
               style: ButtonStyle(
+                backgroundColor:
+                    MaterialStateColor.resolveWith((states) => lightGreenColor),
                 shape: MaterialStateProperty.all(
                   RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(18.0),
@@ -130,11 +167,15 @@ class ScheduleItem extends StatelessWidget {
                 child: Text(
                   'AJUDAR A ORGANIZAR',
                   textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontFamily: 'BebasNeue',
+                    fontSize: 15.5,
+                  ),
                 ),
               ),
               onPressed: () {
                 html.window.open(
-                    'https://api.whatsapp.com/send?phone=+351915549968&text=Oi, eu gostaria de ajudar!',
+                    'https://api.whatsapp.com/send?phone=+351$phone&text=Oi, eu gostaria de ajudar a organizar o(a) $title!',
                     '');
               },
             ),

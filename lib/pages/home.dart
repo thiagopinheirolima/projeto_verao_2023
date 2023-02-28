@@ -46,8 +46,9 @@ class HomePage extends StatelessWidget {
                 const Center(
                   child: Text(
                     'HOME',
-                    textScaleFactor: 3,
                     style: TextStyle(
+                      fontSize: 100,
+                      fontFamily: 'BebasNeue',
                       color: Colors.white,
                     ),
                   ),
@@ -73,32 +74,32 @@ class HomePage extends StatelessWidget {
                 children: [
                   HomeItem(
                     name: 'PARTICIPANTES',
-                    icon: Icons.people,
+                    icon: 'assets/images/icons/participantes.png',
                     onTap: () => context.goNamed('users'),
                   ),
                   HomeItem(
                     name: 'CATEGORIAS',
-                    icon: Icons.category,
+                    icon: 'assets/images/icons/votos.png',
                     onTap: () {},
                   ),
                   HomeItem(
                     name: 'RANKING',
-                    icon: Icons.star,
+                    icon: 'assets/images/icons/ranking.png',
                     onTap: () {},
                   ),
                   HomeItem(
                     name: 'A CASA',
-                    icon: Icons.house,
+                    icon: 'assets/images/icons/acasa.png',
                     onTap: () {},
                   ),
                   HomeItem(
                     name: 'FAQ',
-                    icon: Icons.question_mark,
+                    icon: 'assets/images/icons/faq.png',
                     onTap: () {},
                   ),
                   HomeItem(
                     name: 'PROGRAMAÇÃO',
-                    icon: Icons.calendar_month,
+                    icon: 'assets/images/icons/programacao.png',
                     onTap: () => context.goNamed('schedule'),
                   )
                 ],
@@ -133,7 +134,7 @@ class HomeItem extends StatelessWidget {
 
   final Function() onTap;
   final String name;
-  final IconData icon;
+  final String icon;
 
   @override
   Widget build(BuildContext context) {
@@ -144,7 +145,7 @@ class HomeItem extends StatelessWidget {
           borderRadius: BorderRadius.vertical(
             top: Radius.circular(20),
           ),
-          color: Colors.teal,
+          color: lightGreenColor,
         ),
         child: Flex(
           direction: Axis.vertical,
@@ -155,27 +156,28 @@ class HomeItem extends StatelessWidget {
                 child: Text(
                   name,
                   style: const TextStyle(
-                    color: primaryColor,
+                    color: darkGreenColor,
+                    fontFamily: 'AmaticSC',
+                    fontSize: 24,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
               ),
             ),
             Expanded(
-              flex: 2,
+              flex: 3,
               child: Container(
                 constraints: const BoxConstraints.expand(),
                 decoration: const BoxDecoration(
-                  color: primaryColor,
+                  color: darkGreenColor,
                   borderRadius: BorderRadius.vertical(
                     top: Radius.elliptical(600, 300),
                   ),
                 ),
                 child: Center(
-                  child: Icon(
-                    icon,
-                    size: 50,
-                    color: Colors.white,
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Image.asset(icon),
                   ),
                 ),
               ),
